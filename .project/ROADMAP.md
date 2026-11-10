@@ -78,8 +78,8 @@ Open questions
 Goal: Thêm nhân vật NPC giao nhiệm vụ học tập, hộp thoại hội thoại phân nhánh và luyện phát âm bằng giọng nói qua micro với cơ chế fallback.
 Depends on: [M002]
 Surfaces: web app
-Status: active
-Archive: null
+Status: shipped
+Archive: .project/archive/003-npc-quests-and-voice
 Integrated: null
 
 Scope: in
