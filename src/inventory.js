@@ -25,6 +25,7 @@ export class InventoryManager {
     this.onOpenCallbacks = [];
     this.onCloseCallbacks = [];
     this.onChangeCallbacks = [];
+    this.onResetCallbacks = [];
 
     this._createDOM();
     this._attachEvents();
@@ -58,6 +59,7 @@ export class InventoryManager {
           </div>
 
           <div class="inventory-footer">
+            <button class="inventory-reset-btn" id="inventory-reset-btn" data-action="reset" style="background: rgba(239, 68, 68, 0.2); border: 1px solid rgba(239, 68, 68, 0.4); color: #f87171; padding: 4px 10px; border-radius: 8px; font-size: 0.75rem; cursor: pointer; float: left;">🔄 Đặt lại tiến trình</button>
             <span class="inventory-hint">Nhấn <kbd>I</kbd> hoặc <kbd>Esc</kbd> để đóng túi đồ</span>
           </div>
         </div>
@@ -87,6 +89,10 @@ export class InventoryManager {
       const target = e.target;
       if (target.dataset && target.dataset.action === 'close') {
         this.close();
+      } else if (target.dataset && target.dataset.action === 'reset') {
+        if (confirm('Bạn có chắc chắn muốn xóa toàn bộ tiến trình học tập và bắt đầu lại?')) {
+          this.onResetCallbacks.forEach(cb => cb());
+        }
       }
     });
 
@@ -246,6 +252,10 @@ export class InventoryManager {
 
   onChange(cb) {
     this.onChangeCallbacks.push(cb);
+  }
+
+  onReset(cb) {
+    this.onResetCallbacks.push(cb);
   }
 
   _notifyChange() {

@@ -4,9 +4,9 @@ title: Xây dựng StorageService, lưu trữ và khôi phục tiến trình t�
 wave: 2
 deps:
   - T001
-status: pending
-agent: null
-base: null
+status: done
+agent: Antigravity
+base: 139f12fcec635edd7c0f9a4fd7dbabf40569b1ee
 worktree: null
 task_branch: null
 files:
@@ -68,3 +68,52 @@ Heavy: no
 ## Log
 
 - 2026-11-10 — created by planner
+- 2026-11-11 — implemented StorageService (src/storage.js) with in-memory fallback (E4) and corruption validation (N4)
+- 2026-11-11 — integrated auto-saving and state restoration into src/main.js and src/inventory.js
+- 2026-11-11 — added reset data button and confirmed build and unit tests pass
+- 2026-11-10 — orchestrator Verify (sidecar gsd-path-verify/task-t002-verify): pass, exit 0; output tail:
+  ```
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 18 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   1.55 kB │ gzip:   0.66 kB
+  dist/assets/index-BQM0bm_S.css   19.89 kB │ gzip:   4.09 kB
+  dist/assets/index-nqKntf91.js   536.38 kB │ gzip: 137.47 kB
+  ✓ built in 1.96s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  
+  (!) Some chunks are larger than 500 kB after minification. Consider:
+  - Using dynamic import() to code-split the application
+  - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+  - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+  ```
+- 2026-11-10 — orchestrator regression Verify of T001 (sidecar gsd-path-verify/task-t002-verify): pass, exit 0; output tail:
+  ```
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 18 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   1.55 kB │ gzip:   0.66 kB
+  dist/assets/index-BQM0bm_S.css   19.89 kB │ gzip:   4.09 kB
+  dist/assets/index-nqKntf91.js   536.38 kB │ gzip: 137.47 kB
+  ✓ built in 1.97s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  
+  (!) Some chunks are larger than 500 kB after minification. Consider:
+  - Using dynamic import() to code-split the application
+  - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+  - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+  ```
