@@ -3,9 +3,9 @@ id: T001
 title: Xây dựng nhân vật NPC 3D và hệ thống hộp thoại hội thoại phân nhánh
 wave: 1
 deps: []
-status: pending
-agent: null
-base: null
+status: done
+agent: Antigravity
+base: 24a3bf8136fbc6c112f82a2c9f227bc0d1b7f0b6
 worktree: null
 task_branch: null
 files:
@@ -68,3 +68,27 @@ Heavy: no
 ## Log
 
 - 2026-11-10 — created by planner
+- 2026-11-10 — implemented NPCController with procedural waving animation, floating 3D label badge, DialogueManager branching UI overlay with keyboard Escape and input lock/unlock hooks. Production build succeeded.
+- 2026-11-10 — orchestrator Verify (sidecar gsd-path-verify/task-t001-verify): pass, exit 0; output tail:
+  ```
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 13 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   0.70 kB │ gzip:   0.41 kB
+  dist/assets/index-Bfy9oUA0.css    3.80 kB │ gzip:   1.36 kB
+  dist/assets/index-DrdIhE8N.js   504.98 kB │ gzip: 129.03 kB
+  ✓ built in 1.84s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  
+  (!) Some chunks are larger than 500 kB after minification. Consider:
+  - Using dynamic import() to code-split the application
+  - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+  - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+  ```
