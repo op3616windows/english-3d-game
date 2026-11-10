@@ -80,7 +80,7 @@ Depends on: [M002]
 Surfaces: web app
 Status: shipped
 Archive: .project/archive/003-npc-quests-and-voice
-Integrated: null
+Integrated: 1f4a5a54fd34a40875c7ce1a54a0445d47fbff9b
 
 Scope: in
 - Mô hình NPC 3D đứng trong phòng/thị trấn với hoạt ảnh vẫy tay chào
@@ -111,7 +111,7 @@ Depends on: [M003]
 Surfaces: web app
 Status: shipped
 Archive: .project/archive/004-gamification-and-progression
-Integrated: null
+Integrated: 0e6145f3d2ea827bfbe17e4af9ecaf4b916cc4b1
 
 Scope: in
 - Túi đồ (Inventory UI) hiển thị các vật phẩm từ vựng đã thu thập được trong không gian 3D
@@ -130,6 +130,38 @@ Success criteria
 
 Risks
 - Tràn dữ liệu dung lượng LocalStorage nếu lưu trữ trạng thái quá phức tạp.
+
+Open questions
+- None
+
+### M005 — multi-room-and-environments
+
+Goal: Mở rộng không gian học tập từ 1 căn phòng sang hệ thống nhiều phòng theo chủ đề (Phòng khách, Bếp/Quán ăn), có cổng dịch chuyển chuyển cảnh mượt mà và bổ sung nhiều từ vựng 3D mới theo chủ đề.
+Depends on: [M004]
+Surfaces: web app
+Status: shipped
+Archive: .project/archive/005-multi-room-and-environments
+Integrated: null
+
+Scope: in
+- Thiết kế hệ thống Scene Switcher / Zone Manager quản lý nhiều không gian 3D (Study Room, Living Room, Kitchen & Cafe)
+- Cổng dịch chuyển / Cửa ra vào (Doors / Portals) cho phép nhân vật bước qua để chuyển cảnh mượt mà
+- Bổ sung các đồ vật 3D tương tác mới theo chủ đề phòng khách, ẩm thực, gia đình
+- Tích hợp Minimap / HUD Zone Indicator hiển thị tên khu vực hiện tại và bản đồ mini thu nhỏ
+- Tối ưu hiệu năng bộ nhớ và dọn dẹp tài nguyên (dispose mesh/textures) khi chuyển đổi giữa các phòng
+
+Scope: out
+- Hệ thống ôn tập ngắt quãng Spaced Repetition (SRS) (thuộc M006)
+- Tích hợp AI đàm thoại tự do với NPC qua LLM (thuộc M007)
+
+Success criteria
+1. Người chơi có thể di chuyển nhân vật đến cửa/cổng dịch chuyển để chuyển sang phân cảnh mới (ví dụ: từ Study Room sang Kitchen hoặc Living Room) trong dưới 1 giây.
+2. Mỗi phân cảnh mới có các đồ vật 3D tương tác mới theo đúng chủ đề, hiển thị thẻ từ vựng và âm thanh phát âm tương ứng.
+3. Bản đồ thu nhỏ (Minimap) hoặc thông báo khu vực trên HUD hiển thị chính xác tên phòng hiện tại và vị trí người chơi.
+4. Quá trình chuyển phòng giải phóng tài nguyên Three.js cũ, duy trì 60 FPS ổn định không bị rò rỉ bộ nhớ.
+
+Risks
+- Quá tải bộ nhớ WebGL/RAM nếu không giải phóng texture và geometry của phòng cũ trước khi nạp phòng mới.
 
 Open questions
 - None
