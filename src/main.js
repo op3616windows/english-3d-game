@@ -9,6 +9,9 @@ import { NPCController } from './npc.js';
 import { DialogueManager, VoiceChallengeModal, QuestCelebrationBanner, QuestTrackerHUD } from './dialogue.js';
 import { QuestEngine } from './quest.js';
 import { VoiceService } from './voice.js';
+import { InventoryManager } from './inventory.js';
+import { ProgressionManager } from './progression.js';
+import { StorageService } from './storage.js';
 
 const container = document.getElementById('canvas-container');
 const uiOverlay = document.getElementById('ui-overlay');
@@ -20,6 +23,9 @@ const characterController = new CharacterController(sceneManager.scene, sceneMan
 const audioService = new AudioService();
 const voiceService = new VoiceService();
 const questEngine = new QuestEngine();
+const progressionManager = new ProgressionManager(uiOverlay);
+const inventoryManager = new InventoryManager(uiOverlay, audioService);
+const storageService = new StorageService();
 
 const vocabModal = new VocabModal(uiOverlay, audioService);
 const dialogueManager = new DialogueManager(uiOverlay);
@@ -39,6 +45,118 @@ dialogueManager.onClose(() => inputManager.setEnabled(true));
 voiceChallengeModal.onOpen(() => inputManager.setEnabled(false));
 voiceChallengeModal.onClose(() => inputManager.setEnabled(true));
 
+inventoryManager.onOpen(() => inputManager.setEnabled(false));
+inventoryManager.onClose(() => inputManager.setEnabled(true));
+
+// Setup HUD Elements
+const levelBadge = document.getElementById('hud-level-badge');
+const xpText = document.getElementById('hud-xp-text');
+const xpBarFill = document.getElementById('hud-xp-bar-fill');
+const inventoryBtn = document.getElementById('hud-inventory-btn');
+const inventoryBadge = document.getElementById('hud-inventory-badge');
+
+if (inventoryBtn) {
+  inventoryBtn.addEventListener('click', () => {
+    if (inventoryManager.isOpen()) {
+      inventoryManager.close();
+    } else {
+      inventoryManager.open();
+    }
+  });
+}
+
+// Update HUD when XP changes
+progressionManager.onXPChange(({ xp, nextXP, level, ratio }) => {
+  if (levelBadge) levelBadge.textContent = `LV ${level}`;
+  if (xpText) xpText.textContent = `${xp} / ${nextXP} XP`;
+  if (xpBarFill) xpBarFill.style.width = `${Math.round(ratio * 100)}%`;
+});
+
+// Update inventory badge count
+inventoryManager.onChange((items) => {
+  if (inventoryBadge) inventoryBadge.textContent = `${items.length}`;
+});
+
+// LocalStorage Persistence (E3, SC3)
+let isRestoringState = false;
+
+function saveGameState() {
+  if (isRestoringState) return;
+  const playerPos = characterController.getPosition();
+  const questsState = questEngine.quests.map(q => ({ id: q.id, status: q.status }));
+
+  storageService.save({
+    level: progressionManager.getLevel(),
+    xp: progressionManager.getXP(),
+    inventory: inventoryManager.getItems(),
+    quests: questsState,
+    badges: questEngine.badges,
+    playerPos: { x: playerPos.x, y: playerPos.y, z: playerPos.z }
+  });
+}
+
+function loadGameState() {
+  isRestoringState = true;
+  const saved = storageService.load();
+
+  if (saved) {
+    // 1. Restore Level & XP
+    progressionManager.loadFromData({ level: saved.level, xp: saved.xp });
+
+    // 2. Restore Inventory
+    if (saved.inventory && Array.isArray(saved.inventory)) {
+      inventoryManager.loadFromData(saved.inventory);
+    }
+
+    // 3. Restore Quests & Badges
+    if (saved.quests && Array.isArray(saved.quests)) {
+      saved.quests.forEach(sq => {
+        const quest = questEngine.quests.find(q => q.id === sq.id);
+        if (quest) {
+          quest.status = sq.status;
+        }
+      });
+    }
+    if (saved.badges && Array.isArray(saved.badges)) {
+      questEngine.badges = [...saved.badges];
+    }
+    questEngine._emit();
+
+    // 4. Restore Player Position
+    if (saved.playerPos && typeof saved.playerPos.x === 'number') {
+      characterController.group.position.set(saved.playerPos.x, saved.playerPos.y, saved.playerPos.z);
+    }
+  }
+
+  isRestoringState = false;
+}
+
+// Restore saved progress on startup
+loadGameState();
+
+// Auto-save triggers
+inventoryManager.onChange(() => saveGameState());
+progressionManager.onXPChange(() => saveGameState());
+questEngine.onQuestChange(() => saveGameState());
+
+inventoryManager.onReset(() => {
+  storageService.clear();
+  window.location.reload();
+});
+
+if (typeof window !== 'undefined') {
+  window.addEventListener('beforeunload', () => saveGameState());
+  window.resetWordQuestProgress = () => {
+    storageService.clear();
+    window.location.reload();
+  };
+}
+
+// Periodic auto-save every 4 seconds to capture player position
+setInterval(() => {
+  saveGameState();
+}, 4000);
+
 const interactableManager = new InteractableManager(
   sceneManager.scene,
   sceneManager.camera,
@@ -49,7 +167,10 @@ createDefaultInteractables(sceneManager.scene, interactableManager);
 // Handle quest challenge launch
 function openChallengeForWord(word, ipa) {
   voiceChallengeModal.open({ word, ipa }, (matchedWord) => {
-    questEngine.checkObjective(word, matchedWord);
+    const res = questEngine.checkObjective(word, matchedWord);
+    // Reward XP for completing speech challenge
+    progressionManager.addXP(35);
+    saveGameState();
   });
 }
 
@@ -64,7 +185,7 @@ function handleNPCDialogue() {
       text: currentQuest.npcReward || `Excellent work! You mastered the pronunciation for "${currentQuest.targetWord}"!`,
       options: [
         {
-          label: `🏆 Nhận phần thưởng (+${currentQuest.reward.exp} EXP, Huy hiệu ${currentQuest.reward.badge})`,
+          label: `🏆 Nhận phần thưởng (+${currentQuest.reward.exp} XP, Huy hiệu ${currentQuest.reward.badge})`,
           action: 'claim'
         }
       ]
@@ -73,7 +194,9 @@ function handleNPCDialogue() {
         const res = questEngine.turnInQuest(currentQuest.id);
         dialogueManager.close();
         if (res.success) {
+          progressionManager.addXP(res.reward.exp);
           celebrationBanner.show(currentQuest.title, res.reward);
+          saveGameState();
         }
       } else {
         dialogueManager.close();
@@ -112,6 +235,7 @@ function handleNPCDialogue() {
     }, (choice) => {
       if (choice.action === 'accept_quest') {
         questEngine.acceptQuest(availableQuest.id);
+        saveGameState();
         dialogueManager.show({
           speaker: 'Teacher Alex',
           text: `Tuyệt vời! Hãy tìm "${availableQuest.targetObject}" và hoàn thành thử thách phát âm nhé!`,
@@ -137,7 +261,7 @@ function handleNPCDialogue() {
 }
 
 function tryInteract() {
-  if (vocabModal.isOpen() || dialogueManager.isOpen() || voiceChallengeModal.isOpen()) return;
+  if (vocabModal.isOpen() || dialogueManager.isOpen() || voiceChallengeModal.isOpen() || inventoryManager.isOpen()) return;
 
   const playerPos = characterController.getPosition();
   const npcDist = playerPos.distanceTo(npcController.getPosition());
@@ -153,6 +277,13 @@ function tryInteract() {
   if (current && current.vocab) {
     const vocab = current.vocab;
     const currentQuest = questEngine.getCurrentQuest();
+
+    // Collect into Inventory & award discovery XP
+    const added = inventoryManager.addItem(vocab);
+    if (added) {
+      progressionManager.addXP(25);
+    }
+    saveGameState();
 
     // Open vocabulary card
     vocabModal.open(vocab);
@@ -198,7 +329,7 @@ function animate() {
 
   // Update 3D hover raycast and distance highlight
   const playerPos = characterController.getPosition();
-  if (!vocabModal.isOpen() && !dialogueManager.isOpen() && !voiceChallengeModal.isOpen()) {
+  if (!vocabModal.isOpen() && !dialogueManager.isOpen() && !voiceChallengeModal.isOpen() && !inventoryManager.isOpen()) {
     interactableManager.update(playerPos);
   }
 
@@ -206,3 +337,5 @@ function animate() {
 }
 
 animate();
+
+export { progressionManager, inventoryManager, storageService };
