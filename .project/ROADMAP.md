@@ -48,7 +48,7 @@ Depends on: [M001]
 Surfaces: web app
 Status: shipped
 Archive: .project/archive/002-vocabulary-interaction
-Integrated: null
+Integrated: ba4ee0a3bbb3309ad1cebf019c74617401ce27ba
 
 Scope: in
 - Bố trí các đồ vật nội thất 3D (bàn, ghế, quả táo, cuốn sách, máy tính...) với collider/bounding box
@@ -78,7 +78,7 @@ Open questions
 Goal: Thêm nhân vật NPC giao nhiệm vụ học tập, hộp thoại hội thoại phân nhánh và luyện phát âm bằng giọng nói qua micro với cơ chế fallback.
 Depends on: [M002]
 Surfaces: web app
-Status: pending
+Status: active
 Archive: null
 Integrated: null
 
