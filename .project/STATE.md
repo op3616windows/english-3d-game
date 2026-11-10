@@ -1,19 +1,15 @@
 ---
 pipeline: gsd-path/v2
 project: english-3d-game
-milestone: npc-quests-and-voice
-phase: shipped
-                    # inspect only for brownfield; greenfield starts at define
-                    # roadmap only in program flow (CHARTER.md exists)
+milestone: gamification-and-progression
+phase: plan
 status: done
-branch: gsd-path/M003
-                    # the router rebinds before any next-milestone file change
-                    # the bound branch is never main; ship integrates it there
-archive: .project/archive/003-npc-quests-and-voice
+branch: gsd-path/M004
+archive: null
 integration_default: direct
 integration: direct
 integration_source: default
-default_branch: main # origin default branch; initialization records it once, nothing changes it
+default_branch: main
 ---
 
 # Project State
@@ -60,3 +56,9 @@ it on completion. If this file and the artifacts disagree, the artifacts win
 - 2026-11-10 — build — build started
 - 2026-11-10 — ship — build done; final review pending
 - 2026-11-10 — shipped — archive preflight passed; shipment recorded
+- 2026-11-10 — inspect — bound next milestone gamification-and-progression at 1f4a5a5b274f9bcf98af108924952e0224552b2d
+- 2026-11-10 — inspect — inspection artifacts passed
+- 2026-11-10 — define — definition started
+- 2026-11-10 — define — milestone intent approved
+- 2026-11-10 — plan — planning started
+- 2026-11-11 — plan — plan approved

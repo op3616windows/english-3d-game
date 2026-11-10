@@ -109,7 +109,7 @@ Open questions
 Goal: Bổ sung túi đồ (Inventory), hệ thống điểm kinh nghiệm XP, cấp độ, lưu trữ tiến độ trên LocalStorage và hoàn thiện thẩm mỹ giao diện HUD.
 Depends on: [M003]
 Surfaces: web app
-Status: pending
+Status: active
 Archive: null
 Integrated: null
 
