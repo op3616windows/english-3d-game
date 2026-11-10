@@ -1,0 +1,56 @@
+{
+  "canonical_project_dir": ".project",
+  "command": "verify-landed",
+  "head": "9a2c50e452118dcef692b60346408b4cbbca7412",
+  "project_dir": ".project",
+  "tasks": [
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M005",
+        "candidates": [
+          {
+            "base": "68fa1e7219a642bca3b3a12bb994b28f1f8b3b84",
+            "commit": "e504ba2dc9cb7fcd40567f6bb8799c6a5a205c20",
+            "valid": true
+          }
+        ],
+        "head": "9a2c50e452118dcef692b60346408b4cbbca7412",
+        "subject": "T001: X\u00e2y d\u1ef1ng ZoneManager qu\u1ea3n l\u00fd \u0111a ph\u00e2n c\u1ea3nh v\u00e0 h\u1ec7 th\u1ed1ng c\u1eeda d\u1ecbch chuy\u1ec3n chuy\u1ec3n ph\u00f2ng"
+      },
+      "landed_commit": "e504ba2dc9cb7fcd40567f6bb8799c6a5a205c20",
+      "reasons": [],
+      "task": {
+        "base": "68fa1e7219a642bca3b3a12bb994b28f1f8b3b84",
+        "id": "T001",
+        "status": "done",
+        "task_file": ".project/tasks/T001-zone-manager-and-room-portals.md"
+      }
+    },
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M005",
+        "candidates": [
+          {
+            "base": "af1c192f8a09d3c5e445a009efc0dd91f200222a",
+            "commit": "3061aad5bef3540c30cdae3107d969d709f426c7",
+            "valid": true
+          }
+        ],
+        "head": "9a2c50e452118dcef692b60346408b4cbbca7412",
+        "subject": "T002: T\u00edch h\u1ee3p b\u1ed9 t\u1eeb v\u1ef1ng 3D theo ch\u1ee7 \u0111\u1ec1 ph\u00f2ng, giao di\u1ec7n Minimap v\u00e0 th\u00f4ng b\u00e1o khu v\u1ef1c tr\u00ean HUD"
+      },
+      "landed_commit": "3061aad5bef3540c30cdae3107d969d709f426c7",
+      "reasons": [],
+      "task": {
+        "base": "af1c192f8a09d3c5e445a009efc0dd91f200222a",
+        "id": "T002",
+        "status": "done",
+        "task_file": ".project/tasks/T002-thematic-vocab-and-minimap.md"
+      }
+    }
+  ]
+}
