@@ -1,0 +1,56 @@
+{
+  "canonical_project_dir": ".project",
+  "command": "verify-landed",
+  "head": "21ea59119a51c9d7cf785daabe0ce24a8455eb04",
+  "project_dir": ".project",
+  "tasks": [
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M003",
+        "candidates": [
+          {
+            "base": "24a3bf8136fbc6c112f82a2c9f227bc0d1b7f0b6",
+            "commit": "8b5c3742896efe8b2b74fad9c7971499ac36922a",
+            "valid": true
+          }
+        ],
+        "head": "21ea59119a51c9d7cf785daabe0ce24a8455eb04",
+        "subject": "T001: X\u00e2y d\u1ef1ng nh\u00e2n v\u1eadt NPC 3D v\u00e0 h\u1ec7 th\u1ed1ng h\u1ed9p tho\u1ea1i h\u1ed9i tho\u1ea1i ph\u00e2n nh\u00e1nh"
+      },
+      "landed_commit": "8b5c3742896efe8b2b74fad9c7971499ac36922a",
+      "reasons": [],
+      "task": {
+        "base": "24a3bf8136fbc6c112f82a2c9f227bc0d1b7f0b6",
+        "id": "T001",
+        "status": "done",
+        "task_file": ".project/tasks/T001-npc-and-dialogue.md"
+      }
+    },
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M003",
+        "candidates": [
+          {
+            "base": "29fdc11268ed086d79ec43ddb13ef446c172c04b",
+            "commit": "f65a94336d7fd4bb69824d32399698babd716a1d",
+            "valid": true
+          }
+        ],
+        "head": "21ea59119a51c9d7cf785daabe0ce24a8455eb04",
+        "subject": "T002: X\u00e2y d\u1ef1ng Quest Engine, nh\u1eadn di\u1ec7n gi\u1ecdng n\u00f3i qua microphone v\u00e0 ho\u00e0n th\u00e0nh tr\u1ea3 th\u01b0\u1edfng"
+      },
+      "landed_commit": "f65a94336d7fd4bb69824d32399698babd716a1d",
+      "reasons": [],
+      "task": {
+        "base": "29fdc11268ed086d79ec43ddb13ef446c172c04b",
+        "id": "T002",
+        "status": "done",
+        "task_file": ".project/tasks/T002-quest-engine-and-voice-recognition.md"
+      }
+    }
+  ]
+}

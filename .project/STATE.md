@@ -2,7 +2,7 @@
 pipeline: gsd-path/v2
 project: english-3d-game
 milestone: npc-quests-and-voice
-phase: build
+phase: ship
                     # inspect only for brownfield; greenfield starts at define
                     # roadmap only in program flow (CHARTER.md exists)
 status: active
@@ -58,3 +58,4 @@ it on completion. If this file and the artifacts disagree, the artifacts win
 - 2026-11-10 — plan — planning started
 - 2026-11-10 — plan — plan approved
 - 2026-11-10 — build — build started
+- 2026-11-10 — ship — build done; final review pending
