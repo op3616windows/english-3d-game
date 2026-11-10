@@ -21,6 +21,11 @@ Review depth: full
 Goal: Bổ sung bộ từ vựng 3D theo từng chủ đề phòng, giao diện Minimap 2D và bảng thông báo khu vực trên HUD.
 Review depth: full
 
+## Wave 3 — patch
+
+Goal: Bổ sung lockfile package-lock.json vào repository để lệnh Project Verify npm ci chạy thành công trong môi trường kiểm tra độc lập.
+Review depth: full
+
 ## Surface contract
 
 ### web app — T002

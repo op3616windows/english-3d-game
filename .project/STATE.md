@@ -2,7 +2,7 @@
 pipeline: gsd-path/v2
 project: english-3d-game
 milestone: multi-room-and-environments
-phase: ship
+phase: build
 status: active
 branch: gsd-path/M005
 archive: null
@@ -73,3 +73,7 @@ it on completion. If this file and the artifacts disagree, the artifacts win
 - 2026-11-11 — plan — plan approved
 - 2026-11-11 — build — build started
 - 2026-11-11 — ship — build done; final review pending
+- 2026-11-11 — ship — ship blocked: project Verify failed
+- 2026-11-11 — plan — patch plan reopened
+- 2026-11-11 — plan — patch plan approved
+- 2026-11-11 — build — build started
