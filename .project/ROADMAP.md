@@ -139,8 +139,8 @@ Open questions
 Goal: Mở rộng không gian học tập từ 1 căn phòng sang hệ thống nhiều phòng theo chủ đề (Phòng khách, Bếp/Quán ăn), có cổng dịch chuyển chuyển cảnh mượt mà và bổ sung nhiều từ vựng 3D mới theo chủ đề.
 Depends on: [M004]
 Surfaces: web app
-Status: active
-Archive: null
+Status: shipped
+Archive: .project/archive/005-multi-room-and-environments
 Integrated: null
 
 Scope: in
