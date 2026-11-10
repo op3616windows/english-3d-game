@@ -16,7 +16,7 @@ Depends on: []
 Surfaces: web app
 Status: shipped
 Archive: .project/archive/001-3d-core-and-movement
-Integrated: null
+Integrated: ddb356a467bdd4cffcadfda29d1461ccdf29ade6
 
 Scope: in
 - Cấu trúc dự án Vite + Three.js theo dạng module hóa
@@ -46,8 +46,8 @@ Open questions
 Goal: Xây dựng hệ thống raycasting tương tác đồ vật 3D trong scene và hiển thị thẻ từ vựng 2D overlay kèm phát âm audio chuẩn.
 Depends on: [M001]
 Surfaces: web app
-Status: pending
-Archive: null
+Status: shipped
+Archive: .project/archive/002-vocabulary-interaction
 Integrated: null
 
 Scope: in

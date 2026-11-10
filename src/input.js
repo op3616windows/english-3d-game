@@ -3,6 +3,7 @@
  */
 export class InputManager {
   constructor() {
+    this.enabled = true;
     this.keys = {
       forward: false,
       backward: false,
@@ -17,7 +18,23 @@ export class InputManager {
     window.addEventListener('keyup', this._onKeyUp);
   }
 
+  setEnabled(enabled) {
+    this.enabled = Boolean(enabled);
+    if (!this.enabled) {
+      this.reset();
+    }
+  }
+
+  reset() {
+    this.keys.forward = false;
+    this.keys.backward = false;
+    this.keys.left = false;
+    this.keys.right = false;
+  }
+
   _onKeyDown(event) {
+    if (!this.enabled) return;
+
     switch (event.code) {
       case 'KeyW':
       case 'ArrowUp':
@@ -64,6 +81,10 @@ export class InputManager {
    * @returns {{ x: number, z: number, isMoving: boolean }}
    */
   getMoveVector() {
+    if (!this.enabled) {
+      return { x: 0, z: 0, isMoving: false };
+    }
+
     let x = 0;
     let z = 0;
 
