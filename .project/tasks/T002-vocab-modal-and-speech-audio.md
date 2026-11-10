@@ -4,9 +4,9 @@ title: Xây dựng Thẻ từ vựng 2D Modal và tích hợp Web Speech API ph�
 wave: 2
 deps:
   - T001
-status: pending
-agent: null
-base: null
+status: done
+agent: Antigravity
+base: 0d73b6172a89f661c4f115d27aac3e7b429f919a
 worktree: null
 task_branch: null
 files:
@@ -80,3 +80,50 @@ Heavy: no
 ## Log
 
 - 2026-11-10 — created by planner
+- 2026-11-10 — implemented VocabModal 2D overlay with modern glassmorphism styling, AudioService leveraging Web Speech API with utterance cancellation for idempotent pronunciation, input pause/resume hooks, and click/key-E interaction triggers. Production build succeeded.
+- 2026-11-10 — orchestrator Verify (sidecar gsd-path-verify/task-t002-verify): pass, exit 0; output tail:
+  ```
+  
+  To address all issues (including breaking changes), run:
+    npm audit fix --force
+  
+  Run `npm audit` for details.
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 11 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   0.70 kB │ gzip:   0.41 kB
+  dist/assets/index-Bfy9oUA0.css    3.80 kB │ gzip:   1.36 kB
+  dist/assets/index-Drv-0qc_.js   491.29 kB │ gzip: 125.89 kB
+  ✓ built in 1.85s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  ```
+- 2026-11-10 — orchestrator regression Verify of T001 (sidecar gsd-path-verify/task-t002-verify): pass, exit 0; output tail:
+  ```
+  
+  To address all issues (including breaking changes), run:
+    npm audit fix --force
+  
+  Run `npm audit` for details.
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 11 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   0.70 kB │ gzip:   0.41 kB
+  dist/assets/index-Bfy9oUA0.css    3.80 kB │ gzip:   1.36 kB
+  dist/assets/index-Drv-0qc_.js   491.29 kB │ gzip: 125.89 kB
+  ✓ built in 1.89s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  ```
