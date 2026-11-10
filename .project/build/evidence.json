@@ -1,0 +1,56 @@
+{
+  "canonical_project_dir": ".project",
+  "command": "verify-landed",
+  "head": "ac9311b014588763213e2d1daba0ba11553bde8e",
+  "project_dir": ".project",
+  "tasks": [
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M001",
+        "candidates": [
+          {
+            "base": "e8f1741bd7071acf10108060ace755570f62065f",
+            "commit": "d8fe2c560e789097e30f3db0612d7295bc449804",
+            "valid": true
+          }
+        ],
+        "head": "ac9311b014588763213e2d1daba0ba11553bde8e",
+        "subject": "T001: Thi\u1ebft l\u1eadp d\u1ef1 \u00e1n Vite Three.js v\u00e0 khung c\u1ea3nh 3D c\u01a1 b\u1ea3n"
+      },
+      "landed_commit": "d8fe2c560e789097e30f3db0612d7295bc449804",
+      "reasons": [],
+      "task": {
+        "base": "e8f1741bd7071acf10108060ace755570f62065f",
+        "id": "T001",
+        "status": "done",
+        "task_file": ".project/tasks/T001-vite-threejs-foundation.md"
+      }
+    },
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M001",
+        "candidates": [
+          {
+            "base": "ec8e4069dae407e4db6662d207448644195ac6f1",
+            "commit": "c6e1beb5ce28d90dab5df95d71cd45d29c08a9dd",
+            "valid": true
+          }
+        ],
+        "head": "ac9311b014588763213e2d1daba0ba11553bde8e",
+        "subject": "T002: X\u00e2y d\u1ef1ng b\u1ed9 \u0111i\u1ec1u khi\u1ec3n nh\u00e2n v\u1eadt v\u00e0 ho\u1ea1t \u1ea3nh di chuy\u1ec3n"
+      },
+      "landed_commit": "c6e1beb5ce28d90dab5df95d71cd45d29c08a9dd",
+      "reasons": [],
+      "task": {
+        "base": "ec8e4069dae407e4db6662d207448644195ac6f1",
+        "id": "T002",
+        "status": "done",
+        "task_file": ".project/tasks/T002-character-controller-and-movement.md"
+      }
+    }
+  ]
+}
