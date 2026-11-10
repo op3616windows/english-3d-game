@@ -11,8 +11,29 @@
       <div id="canvas-container"></div>
       <div id="ui-overlay">
         <header class="hud-header">
-          <div class="logo">WordQuest 3D</div>
-          <div class="instructions">WASD to Move | E or Click to Interact &amp; Practice English</div>
+          <div class="hud-left">
+            <div class="logo">WordQuest 3D</div>
+            <div class="hud-level-badge" id="hud-level-badge">LV 1</div>
+          </div>
+
+          <div class="hud-center">
+            <div class="hud-xp-container">
+              <div class="hud-xp-header">
+                <span class="hud-xp-label">TIẾN ĐỘ HỌC TẬP</span>
+                <span class="hud-xp-text" id="hud-xp-text">0 / 100 XP</span>
+              </div>
+              <div class="hud-xp-bar-bg">
+                <div class="hud-xp-bar-fill" id="hud-xp-bar-fill" style="width: 0%"></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="hud-right">
+            <button class="hud-inventory-btn" id="hud-inventory-btn" title="Mở túi đồ (Phím I)">
+              🎒 Túi đồ <span class="hud-inventory-badge" id="hud-inventory-badge">0</span>
+            </button>
+            <div class="instructions">WASD: Đi | E: Tương tác | I: Túi đồ</div>
+          </div>
         </header>
       </div>
     </div>

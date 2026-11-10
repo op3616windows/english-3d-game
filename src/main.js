@@ -9,6 +9,8 @@ import { NPCController } from './npc.js';
 import { DialogueManager, VoiceChallengeModal, QuestCelebrationBanner, QuestTrackerHUD } from './dialogue.js';
 import { QuestEngine } from './quest.js';
 import { VoiceService } from './voice.js';
+import { InventoryManager } from './inventory.js';
+import { ProgressionManager } from './progression.js';
 
 const container = document.getElementById('canvas-container');
 const uiOverlay = document.getElementById('ui-overlay');
@@ -20,6 +22,8 @@ const characterController = new CharacterController(sceneManager.scene, sceneMan
 const audioService = new AudioService();
 const voiceService = new VoiceService();
 const questEngine = new QuestEngine();
+const progressionManager = new ProgressionManager(uiOverlay);
+const inventoryManager = new InventoryManager(uiOverlay, audioService);
 
 const vocabModal = new VocabModal(uiOverlay, audioService);
 const dialogueManager = new DialogueManager(uiOverlay);
@@ -39,6 +43,38 @@ dialogueManager.onClose(() => inputManager.setEnabled(true));
 voiceChallengeModal.onOpen(() => inputManager.setEnabled(false));
 voiceChallengeModal.onClose(() => inputManager.setEnabled(true));
 
+inventoryManager.onOpen(() => inputManager.setEnabled(false));
+inventoryManager.onClose(() => inputManager.setEnabled(true));
+
+// Setup HUD Elements
+const levelBadge = document.getElementById('hud-level-badge');
+const xpText = document.getElementById('hud-xp-text');
+const xpBarFill = document.getElementById('hud-xp-bar-fill');
+const inventoryBtn = document.getElementById('hud-inventory-btn');
+const inventoryBadge = document.getElementById('hud-inventory-badge');
+
+if (inventoryBtn) {
+  inventoryBtn.addEventListener('click', () => {
+    if (inventoryManager.isOpen()) {
+      inventoryManager.close();
+    } else {
+      inventoryManager.open();
+    }
+  });
+}
+
+// Update HUD when XP changes
+progressionManager.onXPChange(({ xp, nextXP, level, ratio }) => {
+  if (levelBadge) levelBadge.textContent = `LV ${level}`;
+  if (xpText) xpText.textContent = `${xp} / ${nextXP} XP`;
+  if (xpBarFill) xpBarFill.style.width = `${Math.round(ratio * 100)}%`;
+});
+
+// Update inventory badge count
+inventoryManager.onChange((items) => {
+  if (inventoryBadge) inventoryBadge.textContent = `${items.length}`;
+});
+
 const interactableManager = new InteractableManager(
   sceneManager.scene,
   sceneManager.camera,
@@ -49,7 +85,9 @@ createDefaultInteractables(sceneManager.scene, interactableManager);
 // Handle quest challenge launch
 function openChallengeForWord(word, ipa) {
   voiceChallengeModal.open({ word, ipa }, (matchedWord) => {
-    questEngine.checkObjective(word, matchedWord);
+    const res = questEngine.checkObjective(word, matchedWord);
+    // Reward XP for completing speech challenge
+    progressionManager.addXP(35);
   });
 }
 
@@ -64,7 +102,7 @@ function handleNPCDialogue() {
       text: currentQuest.npcReward || `Excellent work! You mastered the pronunciation for "${currentQuest.targetWord}"!`,
       options: [
         {
-          label: `🏆 Nhận phần thưởng (+${currentQuest.reward.exp} EXP, Huy hiệu ${currentQuest.reward.badge})`,
+          label: `🏆 Nhận phần thưởng (+${currentQuest.reward.exp} XP, Huy hiệu ${currentQuest.reward.badge})`,
           action: 'claim'
         }
       ]
@@ -73,6 +111,7 @@ function handleNPCDialogue() {
         const res = questEngine.turnInQuest(currentQuest.id);
         dialogueManager.close();
         if (res.success) {
+          progressionManager.addXP(res.reward.exp);
           celebrationBanner.show(currentQuest.title, res.reward);
         }
       } else {
@@ -137,7 +176,7 @@ function handleNPCDialogue() {
 }
 
 function tryInteract() {
-  if (vocabModal.isOpen() || dialogueManager.isOpen() || voiceChallengeModal.isOpen()) return;
+  if (vocabModal.isOpen() || dialogueManager.isOpen() || voiceChallengeModal.isOpen() || inventoryManager.isOpen()) return;
 
   const playerPos = characterController.getPosition();
   const npcDist = playerPos.distanceTo(npcController.getPosition());
@@ -153,6 +192,12 @@ function tryInteract() {
   if (current && current.vocab) {
     const vocab = current.vocab;
     const currentQuest = questEngine.getCurrentQuest();
+
+    // Collect into Inventory & award discovery XP
+    const added = inventoryManager.addItem(vocab);
+    if (added) {
+      progressionManager.addXP(25);
+    }
 
     // Open vocabulary card
     vocabModal.open(vocab);
@@ -198,7 +243,7 @@ function animate() {
 
   // Update 3D hover raycast and distance highlight
   const playerPos = characterController.getPosition();
-  if (!vocabModal.isOpen() && !dialogueManager.isOpen() && !voiceChallengeModal.isOpen()) {
+  if (!vocabModal.isOpen() && !dialogueManager.isOpen() && !voiceChallengeModal.isOpen() && !inventoryManager.isOpen()) {
     interactableManager.update(playerPos);
   }
 
@@ -206,3 +251,5 @@ function animate() {
 }
 
 animate();
+
+export { progressionManager, inventoryManager };
