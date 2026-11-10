@@ -1,0 +1,56 @@
+{
+  "canonical_project_dir": ".project",
+  "command": "verify-landed",
+  "head": "9d45a78fb9667d3f300131387c15565d5d17d3b3",
+  "project_dir": ".project",
+  "tasks": [
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M004",
+        "candidates": [
+          {
+            "base": "9a533277ac2666d8aeb9feec233dcf4347ec8c96",
+            "commit": "1e75b8dbea0ccf32c998803b84bc07a38c5e63bd",
+            "valid": true
+          }
+        ],
+        "head": "9d45a78fb9667d3f300131387c15565d5d17d3b3",
+        "subject": "T001: X\u00e2y d\u1ef1ng h\u1ec7 th\u1ed1ng T\u00fai \u0111\u1ed3 t\u1eeb v\u1ef1ng v\u00e0 qu\u1ea3n l\u00fd c\u1ea5p \u0111\u1ed9 kinh nghi\u1ec7m (XP & Level)"
+      },
+      "landed_commit": "1e75b8dbea0ccf32c998803b84bc07a38c5e63bd",
+      "reasons": [],
+      "task": {
+        "base": "9a533277ac2666d8aeb9feec233dcf4347ec8c96",
+        "id": "T001",
+        "status": "done",
+        "task_file": ".project/tasks/T001-inventory-and-gamification-system.md"
+      }
+    },
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M004",
+        "candidates": [
+          {
+            "base": "139f12fcec635edd7c0f9a4fd7dbabf40569b1ee",
+            "commit": "05426f4570827dda0f31f0cb137d0cdd15db7e98",
+            "valid": true
+          }
+        ],
+        "head": "9d45a78fb9667d3f300131387c15565d5d17d3b3",
+        "subject": "T002: X\u00e2y d\u1ef1ng StorageService, l\u01b0u tr\u1eef v\u00e0 kh\u00f4i ph\u1ee5c ti\u1ebfn tr\u00ecnh t\u1ef1 \u0111\u1ed9ng tr\u00ean LocalStorage"
+      },
+      "landed_commit": "05426f4570827dda0f31f0cb137d0cdd15db7e98",
+      "reasons": [],
+      "task": {
+        "base": "139f12fcec635edd7c0f9a4fd7dbabf40569b1ee",
+        "id": "T002",
+        "status": "done",
+        "task_file": ".project/tasks/T002-localstorage-persistence-and-integration.md"
+      }
+    }
+  ]
+}

@@ -2,7 +2,7 @@
 pipeline: gsd-path/v2
 project: english-3d-game
 milestone: gamification-and-progression
-phase: build
+phase: ship
 status: active
 branch: gsd-path/M004
 archive: null
@@ -63,3 +63,4 @@ it on completion. If this file and the artifacts disagree, the artifacts win
 - 2026-11-10 — plan — planning started
 - 2026-11-11 — plan — plan approved
 - 2026-11-11 — build — build started
+- 2026-11-11 — ship — build done; final review pending
