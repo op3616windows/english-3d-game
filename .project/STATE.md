@@ -1,18 +1,18 @@
 ---
 pipeline: gsd-path/v2
 project: english-3d-game
-milestone: 3d-core-and-movement
-phase: shipped
+milestone: vocabulary-interaction
+phase: plan
                     # inspect only for brownfield; greenfield starts at define
                     # roadmap only in program flow (CHARTER.md exists)
 status: done
-branch: gsd-path/M001        # bound per milestone as gsd-path/M00N; after integration
+branch: gsd-path/M002
                     # the router rebinds before any next-milestone file change
                     # the bound branch is never main; ship integrates it there
-archive: .project/archive/001-3d-core-and-movement
-integration_default: direct # direct | pull-request | external-landing; project setting
-integration: direct # current milestone; may override the default before build
-integration_source: default # default | milestone; preserves override provenance
+archive: null
+integration_default: direct
+integration: direct
+integration_source: default
 default_branch: main # origin default branch; initialization records it once, nothing changes it
 ---
 
@@ -41,3 +41,9 @@ it on completion. If this file and the artifacts disagree, the artifacts win
 - 2026-11-10 — ship — build done; final review pending
 - 2026-11-10 — ship — final gate passed; shipping approval pending
 - 2026-11-10 — shipped — archive preflight passed; shipment recorded
+- 2026-11-10 — inspect — bound next milestone vocabulary-interaction at ddb356a467bdd4cffcadfda29d1461ccdf29ade6
+- 2026-11-10 — inspect — inspection artifacts passed
+- 2026-11-10 — define — definition started
+- 2026-11-10 — define — milestone intent approved
+- 2026-11-10 — plan — planning started
+- 2026-11-10 — plan — plan approved
