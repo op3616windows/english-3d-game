@@ -1,9 +1,10 @@
 import * as THREE from 'three';
+export { ZoneManager } from './zoneManager.js';
 
 /**
  * Initializes and manages the Three.js 3D scene.
  * @param {HTMLElement} container - The DOM element holding the WebGL canvas.
- * @returns {{ scene: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, update: (delta: number) => void }}
+ * @returns {{ scene: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, update: (delta: number) => void, removeStaticEnvironment: () => void }}
  */
 export function createScene(container) {
   const scene = new THREE.Scene();
@@ -40,7 +41,10 @@ export function createScene(container) {
   dirLight.shadow.camera.bottom = -20;
   scene.add(dirLight);
 
-  // Ground plane
+  // Default static environment group (can be cleared when ZoneManager takes over)
+  const staticEnvGroup = new THREE.Group();
+  scene.add(staticEnvGroup);
+
   const floorSize = 40;
   const floorGeo = new THREE.PlaneGeometry(floorSize, floorSize);
   const floorMat = new THREE.MeshStandardMaterial({
@@ -51,12 +55,12 @@ export function createScene(container) {
   const floor = new THREE.Mesh(floorGeo, floorMat);
   floor.rotation.x = -Math.PI / 2;
   floor.receiveShadow = true;
-  scene.add(floor);
+  staticEnvGroup.add(floor);
 
   // Visual grid helper
   const gridHelper = new THREE.GridHelper(floorSize, 40, 0x38bdf8, 0x475569);
   gridHelper.position.y = 0.01;
-  scene.add(gridHelper);
+  staticEnvGroup.add(gridHelper);
 
   // Boundary markers
   const boundaryGeo = new THREE.BoxGeometry(floorSize, 0.5, 0.5);
@@ -65,7 +69,17 @@ export function createScene(container) {
   wallZ1.position.set(0, 0.25, floorSize / 2);
   const wallZ2 = new THREE.Mesh(boundaryGeo, boundaryMat);
   wallZ2.position.set(0, 0.25, -floorSize / 2);
-  scene.add(wallZ1, wallZ2);
+  staticEnvGroup.add(wallZ1, wallZ2);
+
+  const removeStaticEnvironment = () => {
+    while (staticEnvGroup.children.length > 0) {
+      const obj = staticEnvGroup.children[0];
+      staticEnvGroup.remove(obj);
+      if (obj.geometry) obj.geometry.dispose();
+      if (obj.material) obj.material.dispose();
+    }
+    scene.remove(staticEnvGroup);
+  };
 
   // Window resize handler
   const handleResize = () => {
@@ -85,5 +99,5 @@ export function createScene(container) {
     renderer.render(scene, camera);
   };
 
-  return { scene, camera, renderer, update };
+  return { scene, camera, renderer, update, removeStaticEnvironment };
 }

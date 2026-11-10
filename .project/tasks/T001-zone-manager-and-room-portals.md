@@ -3,9 +3,9 @@ id: T001
 title: Xây dựng ZoneManager quản lý đa phân cảnh và hệ thống cửa dịch chuyển chuyển phòng
 wave: 1
 deps: []
-status: pending
-agent: null
-base: null
+status: done
+agent: build_T001
+base: 68fa1e7219a642bca3b3a12bb994b28f1f8b3b84
 worktree: null
 task_branch: null
 files:
@@ -59,3 +59,5 @@ Heavy: no
 ## Log
 
 - 2026-11-11 — created by planner
+- 2026-11-11 — implemented ZoneManager, multi-room zone configs, portal doorway meshes, debounce transition logic, and geometry/material disposal for memory safety (SC1, SC4)
+- 2026-11-10 — orchestrator Verify (sidecar gsd-path-verify/task-t001-verify): pass, exit 0
