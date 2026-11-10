@@ -1,0 +1,56 @@
+{
+  "canonical_project_dir": ".project",
+  "command": "verify-landed",
+  "head": "8d3a20914ac89c384b5685ec03496aaff3228cdf",
+  "project_dir": ".project",
+  "tasks": [
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M002",
+        "candidates": [
+          {
+            "base": "a044fb96fdcbec0a81a0be2c6555fb2c0a2df0e2",
+            "commit": "4652d2a24009723593db67cf1dafad49a44df9a2",
+            "valid": true
+          }
+        ],
+        "head": "8d3a20914ac89c384b5685ec03496aaff3228cdf",
+        "subject": "T001: X\u00e2y d\u1ef1ng c\u00e1c \u0111\u1ed3 v\u1eadt 3D t\u01b0\u01a1ng t\u00e1c v\u00e0 h\u1ec7 th\u1ed1ng Raycasting ki\u1ec3m tra kho\u1ea3ng c\u00e1ch g\u1ea7n"
+      },
+      "landed_commit": "4652d2a24009723593db67cf1dafad49a44df9a2",
+      "reasons": [],
+      "task": {
+        "base": "a044fb96fdcbec0a81a0be2c6555fb2c0a2df0e2",
+        "id": "T001",
+        "status": "done",
+        "task_file": ".project/tasks/T001-interactables-and-proximity.md"
+      }
+    },
+    {
+      "classification": "proven-landed",
+      "command": "reconcile",
+      "history": {
+        "branch": "gsd-path/M002",
+        "candidates": [
+          {
+            "base": "0d73b6172a89f661c4f115d27aac3e7b429f919a",
+            "commit": "bca3b3583ed41c20c4f361c2320f3a42b5945863",
+            "valid": true
+          }
+        ],
+        "head": "8d3a20914ac89c384b5685ec03496aaff3228cdf",
+        "subject": "T002: X\u00e2y d\u1ef1ng Th\u1ebb t\u1eeb v\u1ef1ng 2D Modal v\u00e0 t\u00edch h\u1ee3p Web Speech API ph\u00e1t \u00e2m chu\u1ea9n"
+      },
+      "landed_commit": "bca3b3583ed41c20c4f361c2320f3a42b5945863",
+      "reasons": [],
+      "task": {
+        "base": "0d73b6172a89f661c4f115d27aac3e7b429f919a",
+        "id": "T002",
+        "status": "done",
+        "task_file": ".project/tasks/T002-vocab-modal-and-speech-audio.md"
+      }
+    }
+  ]
+}
