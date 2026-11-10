@@ -2,14 +2,14 @@
 pipeline: gsd-path/v2
 project: english-3d-game
 milestone: 3d-core-and-movement
-phase: ship
+phase: shipped
                     # inspect only for brownfield; greenfield starts at define
                     # roadmap only in program flow (CHARTER.md exists)
-status: active
+status: done
 branch: gsd-path/M001        # bound per milestone as gsd-path/M00N; after integration
                     # the router rebinds before any next-milestone file change
                     # the bound branch is never main; ship integrates it there
-archive: null       # persisted archive transaction path; never recomputed
+archive: .project/archive/001-3d-core-and-movement
 integration_default: direct # direct | pull-request | external-landing; project setting
 integration: direct # current milestone; may override the default before build
 integration_source: default # default | milestone; preserves override provenance
@@ -39,3 +39,5 @@ it on completion. If this file and the artifacts disagree, the artifacts win
 - 2026-11-10 — plan — plan approved
 - 2026-11-10 — build — build started
 - 2026-11-10 — ship — build done; final review pending
+- 2026-11-10 — ship — final gate passed; shipping approval pending
+- 2026-11-10 — shipped — archive preflight passed; shipment recorded

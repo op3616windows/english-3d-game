@@ -14,8 +14,8 @@
 Goal: Khởi tạo dự án Three.js với Vite, dựng không gian 3D cơ bản và bộ điều khiển nhân vật góc nhìn thứ 3 với camera follow mượt mà.
 Depends on: []
 Surfaces: web app
-Status: active
-Archive: null
+Status: shipped
+Archive: .project/archive/001-3d-core-and-movement
 Integrated: null
 
 Scope: in
