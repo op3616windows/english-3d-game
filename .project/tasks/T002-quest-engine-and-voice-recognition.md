@@ -4,9 +4,9 @@ title: Xây dựng Quest Engine, nhận diện giọng nói qua microphone và h
 wave: 2
 deps:
   - T001
-status: pending
-agent: null
-base: null
+status: done
+agent: Antigravity
+base: 29fdc11268ed086d79ec43ddb13ef446c172c04b
 worktree: null
 task_branch: null
 files:
@@ -79,3 +79,53 @@ Heavy: no
 ## Log
 
 - 2026-11-10 — created by planner
+- 2026-11-10 — implemented QuestEngine (src/quest.js) with full quest lifecycles, objective validation, and debounced rewards
+- 2026-11-10 — implemented VoiceService (src/voice.js) with SpeechRecognition, 7-second safe timeout, fallback verification, and Web Audio chime fanfare
+- 2026-11-10 — added VoiceChallengeModal, QuestCelebrationBanner, and QuestTrackerHUD in src/dialogue.js and styled in src/style.css
+- 2026-11-10 — integrated QuestEngine, VoiceService, and modals in src/main.js and verified build successfully
+- 2026-11-10 — orchestrator Verify (sidecar gsd-path-verify/task-t002-verify): pass, exit 0; output tail:
+  ```
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 15 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   0.71 kB │ gzip:   0.42 kB
+  dist/assets/index-BdNf-IPD.css   13.38 kB │ gzip:   3.12 kB
+  dist/assets/index-DHf8xV4W.js   524.73 kB │ gzip: 134.42 kB
+  ✓ built in 1.95s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  
+  (!) Some chunks are larger than 500 kB after minification. Consider:
+  - Using dynamic import() to code-split the application
+  - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+  - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+  ```
+- 2026-11-10 — orchestrator regression Verify of T001 (sidecar gsd-path-verify/task-t002-verify): pass, exit 0; output tail:
+  ```
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 15 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   0.71 kB │ gzip:   0.42 kB
+  dist/assets/index-BdNf-IPD.css   13.38 kB │ gzip:   3.12 kB
+  dist/assets/index-DHf8xV4W.js   524.73 kB │ gzip: 134.42 kB
+  ✓ built in 1.91s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  
+  (!) Some chunks are larger than 500 kB after minification. Consider:
+  - Using dynamic import() to code-split the application
+  - Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+  - Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+  ```
