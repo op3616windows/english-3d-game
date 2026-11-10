@@ -3,9 +3,9 @@ id: T001
 title: Xây dựng các đồ vật 3D tương tác và hệ thống Raycasting kiểm tra khoảng cách gần
 wave: 1
 deps: []
-status: pending
-agent: null
-base: null
+status: done
+agent: Antigravity
+base: a044fb96fdcbec0a81a0be2c6555fb2c0a2df0e2
 worktree: null
 task_branch: null
 files:
@@ -71,3 +71,27 @@ Heavy: no
 ## Log
 
 - 2026-11-10 — created by planner
+- 2026-11-10 — implemented InteractableManager with Raycasting and character proximity detection, built low-poly 3D study props (table, book, apple, laptop, chair) with vocabulary metadata, emissive highlight shader and interactive HUD prompt. Production build succeeded.
+- 2026-11-10 — orchestrator Verify (sidecar gsd-path-verify/task-t001-verify): pass, exit 0; output tail:
+  ```
+  
+  To address all issues (including breaking changes), run:
+    npm audit fix --force
+  
+  Run `npm audit` for details.
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 9 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   0.68 kB │ gzip:   0.39 kB
+  dist/assets/index-C5of3Znb.css    0.94 kB │ gzip:   0.53 kB
+  dist/assets/index-BT-oskWa.js   486.36 kB │ gzip: 124.25 kB
+  ✓ built in 1.84s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  ```
