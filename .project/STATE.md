@@ -2,7 +2,7 @@
 pipeline: gsd-path/v2
 project: english-3d-game
 milestone: 3d-core-and-movement
-phase: roadmap
+phase: plan
                     # inspect only for brownfield; greenfield starts at define
                     # roadmap only in program flow (CHARTER.md exists)
 status: done
@@ -33,3 +33,7 @@ it on completion. If this file and the artifacts disagree, the artifacts win
 - 2026-11-10 — decide — synthesis .project/SYNTHESIS.md
 - 2026-11-10 — roadmap — roadmap started
 - 2026-11-10 — roadmap — program roadmap approved
+- 2026-11-10 — define — definition started
+- 2026-11-10 — define — milestone intent approved
+- 2026-11-10 — plan — planning started
+- 2026-11-10 — plan — plan approved
