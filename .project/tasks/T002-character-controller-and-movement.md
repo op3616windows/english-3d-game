@@ -4,9 +4,9 @@ title: Xây dựng bộ điều khiển nhân vật và hoạt ảnh di chuyển
 wave: 2
 deps:
   - T001
-status: pending
-agent: null
-base: null
+status: done
+agent: Antigravity
+base: ec8e4069dae407e4db6662d207448644195ac6f1
 worktree: null
 task_branch: null
 files:
@@ -56,3 +56,50 @@ Heavy: no
 ## Log
 
 - 2026-11-10 — created by planner
+- 2026-11-10 — implemented InputManager (WASD/arrows), CharacterController with low-poly humanoid mesh, floor boundary clamping, walk/idle procedural animation, and smooth third-person camera follow. Production build succeeded.
+- 2026-11-10 — orchestrator Verify (sidecar gsd-path-verify/task-t002-verify): pass, exit 0; output tail:
+  ```
+  
+  To address all issues (including breaking changes), run:
+    npm audit fix --force
+  
+  Run `npm audit` for details.
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 8 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   0.68 kB │ gzip:   0.39 kB
+  dist/assets/index-C5of3Znb.css    0.94 kB │ gzip:   0.53 kB
+  dist/assets/index-y5QHb2id.js   475.29 kB │ gzip: 120.32 kB
+  ✓ built in 1.76s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  ```
+- 2026-11-10 — orchestrator regression Verify of T001 (sidecar gsd-path-verify/task-t002-verify): pass, exit 0; output tail:
+  ```
+  
+  To address all issues (including breaking changes), run:
+    npm audit fix --force
+  
+  Run `npm audit` for details.
+  vite v5.4.21 building for production...
+  transforming...
+  ✓ 8 modules transformed.
+  rendering chunks...
+  computing gzip size...
+  dist/index.html                   0.68 kB │ gzip:   0.39 kB
+  dist/assets/index-C5of3Znb.css    0.94 kB │ gzip:   0.53 kB
+  dist/assets/index-y5QHb2id.js   475.29 kB │ gzip: 120.32 kB
+  ✓ built in 1.73s
+  npm warn install-scripts 1 package had install scripts blocked because they are not covered by allowScripts:
+  npm warn install-scripts   esbuild@0.21.5 (postinstall: node install.js)
+  npm warn install-scripts
+  npm warn install-scripts Run `npm install-scripts ls` to review, or `npm install-scripts approve <pkg>` to allow.
+  npm notice run english-3d-game@0.1.0 build
+  npm notice run vite build
+  ```
