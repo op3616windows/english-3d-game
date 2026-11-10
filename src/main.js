@@ -1,5 +1,7 @@
 import * as THREE from 'three';
 import { createScene } from './scene.js';
+import { ZoneManager } from './zoneManager.js';
+import { Minimap } from './minimap.js';
 import { InputManager } from './input.js';
 import { CharacterController } from './character.js';
 import { InteractableManager, createDefaultInteractables } from './interactables.js';
@@ -17,8 +19,22 @@ const container = document.getElementById('canvas-container');
 const uiOverlay = document.getElementById('ui-overlay');
 const sceneManager = createScene(container);
 
+// Clear static default room so ZoneManager manages dynamic room rendering (SC4)
+if (typeof sceneManager.removeStaticEnvironment === 'function') {
+  sceneManager.removeStaticEnvironment();
+}
+
 const inputManager = new InputManager();
 const characterController = new CharacterController(sceneManager.scene, sceneManager.camera);
+
+// Provide setPosition on characterController for portal teleportation (SC1)
+characterController.setPosition = function (x, y, z) {
+  this.group.position.set(x, y, z);
+  this.camera.position.copy(this.group.position).add(this.cameraOffset);
+};
+
+const zoneManager = new ZoneManager(sceneManager);
+const minimap = new Minimap(uiOverlay, zoneManager, characterController);
 
 const audioService = new AudioService();
 const voiceService = new VoiceService();
@@ -162,7 +178,17 @@ const interactableManager = new InteractableManager(
   sceneManager.camera,
   sceneManager.renderer.domElement
 );
-createDefaultInteractables(sceneManager.scene, interactableManager);
+
+// Load interactable 3D vocabulary models for active room zone (SC2)
+interactableManager.loadZoneInteractables(zoneManager.currentZoneId);
+
+// Handle room switching: reload thematic vocab and toggle NPC classroom presence
+zoneManager.onZoneChange((zone) => {
+  interactableManager.loadZoneInteractables(zone.id);
+  if (npcController && npcController.group) {
+    npcController.group.visible = (zone.id === 'study_room');
+  }
+});
 
 // Handle quest challenge launch
 function openChallengeForWord(word, ipa) {
@@ -264,12 +290,14 @@ function tryInteract() {
   if (vocabModal.isOpen() || dialogueManager.isOpen() || voiceChallengeModal.isOpen() || inventoryManager.isOpen()) return;
 
   const playerPos = characterController.getPosition();
-  const npcDist = playerPos.distanceTo(npcController.getPosition());
 
-  // E1: Prioritize NPC conversation if close to Teacher Alex (dist <= 4.5m)
-  if (npcDist <= 4.5) {
-    handleNPCDialogue();
-    return;
+  // E1: Prioritize NPC conversation if in Study Room and close to Teacher Alex (dist <= 4.5m)
+  if (zoneManager.currentZoneId === 'study_room') {
+    const npcDist = playerPos.distanceTo(npcController.getPosition());
+    if (npcDist <= 4.5) {
+      handleNPCDialogue();
+      return;
+    }
   }
 
   // Otherwise check interactable vocabulary props
@@ -324,8 +352,22 @@ function animate() {
   const moveVector = inputManager.getMoveVector();
   characterController.update(delta, moveVector);
 
-  // Update NPC animations (waving, breathing)
-  npcController.update(delta);
+  // Check portal overlap to switch room environments seamlessly (SC1, SC4)
+  if (!zoneManager.isTransitioning) {
+    const portalTarget = zoneManager.checkPortalOverlap(characterController.getPosition());
+    if (portalTarget) {
+      zoneManager.switchZone(portalTarget, characterController);
+    }
+  }
+
+  // Update NPC animations (waving, breathing) if visible in Study Room
+  if (npcController && npcController.group && npcController.group.visible) {
+    npcController.update(delta);
+  }
+
+  // Update portal visual effects & minimap radar (SC3)
+  zoneManager.update(delta);
+  minimap.update();
 
   // Update 3D hover raycast and distance highlight
   const playerPos = characterController.getPosition();
@@ -338,4 +380,4 @@ function animate() {
 
 animate();
 
-export { progressionManager, inventoryManager, storageService };
+export { progressionManager, inventoryManager, storageService, zoneManager, minimap };

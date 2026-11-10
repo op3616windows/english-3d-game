@@ -4,9 +4,9 @@ title: Tích hợp bộ từ vựng 3D theo chủ đề phòng, giao diện Mini
 wave: 2
 deps:
   - T001
-status: pending
-agent: null
-base: null
+status: done
+agent: build_T002
+base: af1c192f8a09d3c5e445a009efc0dd91f200222a
 worktree: null
 task_branch: null
 files:
@@ -64,3 +64,9 @@ Heavy: no
 ## Log
 
 - 2026-11-11 — created by planner
+- 2026-11-11 — implemented thematic vocabulary for living_room (8 items) and kitchen_cafe (8 items) in src/interactables.js
+- 2026-11-11 — added clearInteractables() and loadZoneInteractables() with WebGL disposal to InteractableManager
+- 2026-11-11 — created 2D canvas Minimap radar and HUD Zone Banner in src/minimap.js
+- 2026-11-11 — wired ZoneManager and Minimap into src/main.js, connected zone change listener and portal detection loop
+- 2026-11-11 — verified via node --check and npm run build (all passed, 0 errors)
+- 2026-11-10 — orchestrator Verify (sidecar gsd-path-verify/task-t002-verify): pass, exit 0
