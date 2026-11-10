@@ -46,8 +46,8 @@ Open questions
 Goal: Xây dựng hệ thống raycasting tương tác đồ vật 3D trong scene và hiển thị thẻ từ vựng 2D overlay kèm phát âm audio chuẩn.
 Depends on: [M001]
 Surfaces: web app
-Status: active
-Archive: null
+Status: shipped
+Archive: .project/archive/002-vocabulary-interaction
 Integrated: null
 
 Scope: in
