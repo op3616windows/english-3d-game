@@ -2,10 +2,10 @@
 pipeline: gsd-path/v2
 project: english-3d-game
 milestone: gamification-and-progression
-phase: ship
-status: active
+phase: shipped
+status: done
 branch: gsd-path/M004
-archive: null
+archive: .project/archive/004-gamification-and-progression
 integration_default: direct
 integration: direct
 integration_source: default
@@ -64,3 +64,4 @@ it on completion. If this file and the artifacts disagree, the artifacts win
 - 2026-11-11 — plan — plan approved
 - 2026-11-11 — build — build started
 - 2026-11-11 — ship — build done; final review pending
+- 2026-11-11 — shipped — archive preflight passed; shipment recorded; program complete
